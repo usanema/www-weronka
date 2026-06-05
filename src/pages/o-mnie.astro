@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Button } from '../components/Button';
+---
+
+<Layout title="O mnie">
+  <div class="pt-24 pb-16 bg-secondary/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto slide-up">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">Kilka słów o mnie</h1>
+        <p class="text-xl text-gray-600">
+          Poznaj moją historię i dowiedz się, dlaczego zdecydowałam się towarzyszyć kobietom w jednej z najważniejszych podróży ich życia.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div class="slide-up sticky top-28">
+          <img 
+            src="https://images.unsplash.com/photo-1555252834-8c80fb619208?q=80&w=1000&auto=format&fit=crop" 
+            alt="Weronika Nowik" 
+            class="w-full rounded-[2rem] shadow-xl"
+          />
+        </div>
+        
+        <div class="space-y-6 slide-up" style="animation-delay: 0.2s">
+          <h2 class="text-3xl font-bold text-gray-900">Moja droga do bycia doulą</h2>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Zawsze czułam głęboką potrzebę wspierania innych, ale dopiero własne doświadczenia macierzyńskie uświadomiły mi, jak bardzo kobiety potrzebują opieki nie tylko medycznej, ale i emocjonalnej w okresie okołoporodowym.
+          </p>
+          <p class="text-lg text-gray-700 leading-relaxed">
+            Słowo "doula" pochodzi z języka greckiego i oznacza "kobietę, która służy". Dla mnie to nie jest zawód, to powołanie. To bycie obok — bez oceniania, z pełną akceptacją Twoich wyborów i Twojego ciała.
+          </p>
+
+          <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-4">W co wierzę?</h3>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-primary mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-lg text-gray-700">W siłę i mądrość kobiecego ciała. Twoje ciało wie, jak rodzić.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-primary mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-lg text-gray-700">W to, że każdy poród jest inny i każdy wybór, jakiego dokonasz dla siebie i dziecka, jest właściwy.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-primary mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-lg text-gray-700">W magię czwartego trymestru, który wymaga tyle samo czułości, co noworodek.</span>
+            </li>
+          </ul>
+
+          <h3 class="text-2xl font-bold text-gray-900 mt-12 mb-4">Moje Kwalifikacje</h3>
+          <div class="bg-gray-50 p-6 rounded-2xl">
+            <ul class="space-y-3 text-gray-700">
+              <li>• Certyfikowana Doula Stowarzyszenia Doula w Polsce</li>
+              <li>• Kurs Promotora Karmienia Piersią</li>
+              <li>• Szkolenie "Rebozo w pracy douli"</li>
+              <li>• Warsztaty komunikacji empatycznej NVC</li>
+            </ul>
+          </div>
+
+          <div class="pt-8">
+            <Button href="/kontakt">Porozmawiajmy</Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

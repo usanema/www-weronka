@@ -1,0 +1,33 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Weronika Nowik - Doula, wsparcie okołoporodowe, konsultacje przedporodowe, grupy ciążowe." } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title} | Weronika Nowik - Doula</title>
+  </head>
+  <body class="bg-[#BEDBF4] p-3 sm:p-6 md:p-8 min-h-screen font-sans text-gray-900 selection:bg-primary/30">
+    <div class="max-w-[1600px] mx-auto bg-gradient-to-b from-white via-white to-[#BEDBF4]/50 rounded-[2rem] sm:rounded-[3rem] shadow-2xl min-h-[calc(100vh-1.5rem)] sm:min-h-[calc(100vh-3rem)] flex flex-col relative border border-white/50">
+      <Header />
+      <main class="flex-grow">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

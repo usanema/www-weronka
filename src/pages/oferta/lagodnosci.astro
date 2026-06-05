@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Button } from '../../components/Button';
+---
+
+<Layout title="Łagodności - Spotkania Online">
+  <div class="pt-24 pb-16 bg-teal-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto slide-up">
+        <span class="inline-block py-1 px-3 rounded-full bg-primary/20 text-primary font-semibold text-sm mb-4">Moja Oferta</span>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Łagodności - Spotkania Online</h1>
+        <p class="text-xl text-gray-600">
+          Spotkania stworzone z myślą o mamach z całej Polski i świata. Połączmy się w łagodności bez wychodzenia z domu.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        <div class="slide-up">
+          <img 
+            src="https://images.unsplash.com/photo-1593115456254-209a32c2d2cb?q=80&w=1000&auto=format&fit=crop" 
+            alt="Kobieta podczas rozmowy online" 
+            class="w-full rounded-[2rem] shadow-lg"
+          />
+        </div>
+        <div class="flex flex-col justify-center slide-up" style="animation-delay: 0.2s">
+          <h2 class="text-3xl font-bold mb-6">Wioska kobiet online</h2>
+          <p class="text-lg text-gray-700 mb-4">
+            Zauważyłam ogromną potrzebę wsparcia wśród mam, które mieszkają z dala od dużych miast lub za granicą, albo po prostu brakuje im sił na dojazdy na spotkania stacjonarne.
+          </p>
+          <p class="text-lg text-gray-700 mb-6">
+            Dlatego stworzyłam "Łagodności" – regularne spotkania online, na których w bezpiecznej, domowej atmosferze możemy porozmawiać o blaskach i cieniach bycia mamą.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-teal-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-gray-700">Dostęp z każdego miejsca na Ziemi.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-teal-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-gray-700">Wsparcie emocjonalne i dzielenie się doświadczeniami z innymi mamami.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-teal-500 mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-gray-700">Łagodność dla samej siebie – spotykamy się w piżamach, z kawą lub podczas karmienia malucha!</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="text-center bg-teal-50/50 p-10 rounded-3xl slide-up">
+        <h3 class="text-2xl font-bold mb-4">Kiedy się spotykamy?</h3>
+        <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+          Zostaw mi swój kontakt, a poinformuję Cię o starcie najbliższej edycji. Zazwyczaj łączymy się co dwa tygodnie w godzinach wieczornych lub w czasie porannych drzemek dzieci.
+        </p>
+        <Button href="/kontakt" variant="primary">Dołącz do listy zapisów</Button>
+      </div>
+
+    </div>
+  </section>
+</Layout>

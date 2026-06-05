@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Nunito:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #D85096;
+  --color-secondary: #BEDBF4;
+  --color-dark: #000000;
+  --color-light: #ffffff;
+  
+  --font-comfortaa: 'Comfortaa', sans-serif;
+  --font-nunito: 'Nunito', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-nunito);
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  @apply antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-comfortaa);
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}

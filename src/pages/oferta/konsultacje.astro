@@ -1,0 +1,71 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { Button } from '../../components/Button';
+---
+
+<Layout title="Konsultacje Przedporodowe">
+  <div class="pt-24 pb-16 bg-blue-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto slide-up">
+        <span class="inline-block py-1 px-3 rounded-full bg-primary/20 text-primary font-semibold text-sm mb-4">Moja Oferta</span>
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Konsultacje Przedporodowe</h1>
+        <p class="text-xl text-gray-600">
+          Rozwiej swoje wątpliwości i przygotuj się do porodu z poczuciem pewności. Spotkania indywidualne stacjonarne lub online.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <section class="py-16 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+        <div class="slide-up">
+          <img 
+            src="https://images.unsplash.com/photo-1555244406-b516088e89f8?q=80&w=1000&auto=format&fit=crop" 
+            alt="Konsultacja z doulą" 
+            class="w-full rounded-[2rem] shadow-lg"
+          />
+        </div>
+        <div class="flex flex-col justify-center slide-up" style="animation-delay: 0.2s">
+          <h2 class="text-3xl font-bold mb-6">Dla kogo są konsultacje?</h2>
+          <p class="text-lg text-gray-700 mb-6">
+            Dla każdej kobiety w ciąży (oraz jej partnera/osoby towarzyszącej), która chce świadomie przygotować się do porodu. Niezależnie od tego, czy planujesz poród naturalny, czy cięcie cesarskie – wiedza to siła.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-secondary mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-gray-700">Masz za sobą trudne doświadczenia porodowe i chcesz przepracować swój lęk.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-secondary mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-gray-700">Chcesz stworzyć solidny Plan Porodu.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-secondary mt-1 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-gray-700">Chcesz poznać niefarmakologiczne metody łagodzenia bólu (w tym użycie chusty Rebozo, TENS, masaż).</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-blue-50/50 p-10 rounded-3xl slide-up">
+        <h3 class="text-2xl font-bold mb-6 text-center">Praktyczne informacje</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-center">
+          <div class="bg-white p-6 rounded-2xl shadow-sm">
+            <h4 class="font-bold text-lg mb-2">Czas trwania</h4>
+            <p class="text-gray-600">Spotkanie trwa około 2 godziny. Możemy spotkać się u Ciebie w domu (dojazd na terenie miasta w cenie) lub online.</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl shadow-sm">
+            <h4 class="font-bold text-lg mb-2">Cennik</h4>
+            <p class="text-gray-600">Pojedyncza konsultacja: <strong>250 zł</strong><br/>Pakiet 3 spotkań: <strong>650 zł</strong></p>
+          </div>
+        </div>
+        <div class="mt-8 text-center">
+          <Button href="/kontakt" variant="secondary">Zarezerwuj termin</Button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>
