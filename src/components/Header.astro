@@ -9,77 +9,119 @@ const services = [
 ];
 ---
 
-<header id="main-header" class="sticky top-3 sm:top-6 md:top-8 w-full z-50 transition-all duration-300 bg-white/40 backdrop-blur-md border border-white/60 shadow-sm rounded-[2rem] sm:rounded-[3rem]">
-  <div class="px-6 lg:px-12">
-    <div class="flex justify-between items-center h-24">
+<header id="main-header" class="sticky top-0 md:top-8 w-full z-50 transition-all duration-300 bg-white/40 backdrop-blur-md border border-transparent md:border-white/60 shadow-sm rounded-none md:rounded-[3rem]">
+  <div class="px-4 sm:px-6 lg:px-12">
+    <div class="flex justify-between items-center h-20 md:h-24">
       
       <!-- Logo po lewej -->
-      <div class="flex-shrink-0 flex items-center z-10 w-48 relative h-full">
+      <div class="flex-shrink-0 flex items-center z-10 w-32 md:w-48 relative h-full">
         <a href="/" class="absolute top-1/2 -translate-y-1/2 left-0">
-          <img src="/logo-pink.png" alt="Weronika Nowik Doula" class="h-28 sm:h-36 max-w-none w-auto object-contain transition-transform duration-300 hover:scale-105 mix-blend-multiply" />
+          <img src="/logo-pink.png" alt="Weronika Nowik Doula" class="h-16 sm:h-24 md:h-36 max-w-none w-auto object-contain transition-transform duration-300 hover:scale-105 mix-blend-multiply" />
         </a>
       </div>
 
-      <!-- Wyśrodkowane Menu -->
+      <!-- Wyśrodkowane Menu (Desktop) -->
       <nav class="hidden lg:flex space-x-2 items-center absolute left-1/2 transform -translate-x-1/2">
-        <a href="/" class="px-4 py-2 rounded-full text-sm font-bold text-gray-700 hover:text-primary transition-all duration-300 uppercase tracking-wide">
+        <a href="/" class="px-4 py-2 rounded-full text-xl font-bold text-gray-700 hover:text-primary transition-all duration-300 lowercase tracking-wide">
           Strona Główna
         </a>
-        <a href="/o-mnie" class="px-4 py-2 rounded-full text-sm font-bold text-gray-700 hover:text-primary transition-all duration-300 uppercase tracking-wide">
+        <a href="/o-mnie" class="px-4 py-2 rounded-full text-xl font-bold text-gray-700 hover:text-primary transition-all duration-300 lowercase tracking-wide">
           O mnie
         </a>
         
         <!-- Dropdown Oferta -->
         <div class="relative group">
-          <button class="px-4 py-2 rounded-full text-sm font-bold text-gray-700 hover:text-primary transition-all duration-300 flex items-center gap-1 uppercase tracking-wide">
+          <button class="px-4 py-2 rounded-full text-xl font-bold text-gray-700 hover:text-primary transition-all duration-300 flex items-center gap-1 lowercase tracking-wide">
             Oferta
-            <svg class="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            <svg class="w-5 h-5 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </button>
           
           <div class="absolute top-full left-1/2 transform -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-2 w-72 flex flex-col relative before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:w-4 before:h-4 before:bg-white before:rotate-45 before:border-l before:border-t before:border-gray-100">
+            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-2 w-[22rem] flex flex-col relative before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:w-4 before:h-4 before:bg-white before:rotate-45 before:border-l before:border-t before:border-gray-100">
               {services.map((service) => (
-                <a href={service.href} class="px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:text-primary hover:bg-primary/5 transition-colors relative z-10 flex items-center justify-between group/link">
+                <a href={service.href} class="px-4 py-3 rounded-xl text-lg font-medium text-gray-700 hover:text-primary hover:bg-primary/5 transition-colors relative z-10 flex items-center justify-between group/link lowercase">
                   {service.name}
-                  <svg class="w-4 h-4 opacity-0 -translate-x-2 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:translate-x-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                  <svg class="w-5 h-5 opacity-0 -translate-x-2 transition-all duration-300 group-hover/link:opacity-100 group-hover/link:translate-x-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </a>
               ))}
             </div>
           </div>
         </div>
 
-        <a href="/kontakt" class="px-4 py-2 rounded-full text-sm font-bold text-gray-700 hover:text-primary transition-all duration-300 uppercase tracking-wide">
+        <a href="/kontakt" class="px-4 py-2 rounded-full text-xl font-bold text-gray-700 hover:text-primary transition-all duration-300 lowercase tracking-wide">
           Kontakt
         </a>
       </nav>
 
-      <!-- Ikony Social Media z prawej strony -->
-      <div class="hidden md:flex space-x-3 items-center w-48 justify-end z-10">
-        <a href="#" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors duration-300">
+      <!-- Ikony Social Media z prawej strony (Desktop) -->
+      <div class="hidden lg:flex space-x-3 items-center w-48 justify-end z-10">
+        <a href="#" class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors duration-300 shadow-sm border border-gray-100">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </a>
-        <a href="#" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors duration-300">
+        <a href="#" class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors duration-300 shadow-sm border border-gray-100">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-        </a>
-        <a href="#" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-600 hover:bg-[#25D366] hover:text-white transition-colors duration-300">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
         </a>
       </div>
 
       <!-- Mobile Menu Button -->
-      <div class="lg:hidden flex items-center w-full justify-end">
-        <button class="text-gray-800 hover:text-primary focus:outline-none p-2">
-          <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      <div class="lg:hidden flex items-center w-full justify-end z-[110]">
+        <button id="mobile-menu-button" class="text-gray-800 hover:text-primary focus:outline-none p-2 bg-white/50 backdrop-blur-md rounded-full border border-gray-100 shadow-sm transition-colors">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
       </div>
     </div>
   </div>
 </header>
 
+<!-- Mobile Menu Overlay (Moved outside header to avoid backdrop-blur creating a containing block for fixed positioning) -->
+<div id="mobile-menu" class="fixed inset-0 bg-white/95 backdrop-blur-2xl z-[200] opacity-0 invisible transition-all duration-300 overflow-y-auto">
+  <!-- Close Button -->
+  <div class="absolute top-4 right-4 sm:top-6 sm:right-6">
+    <button id="close-mobile-menu" class="p-3 bg-gray-100/80 backdrop-blur-md rounded-full text-gray-800 hover:text-primary hover:bg-white transition-colors border border-gray-200 shadow-sm">
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button>
+  </div>
+
+  <nav class="flex flex-col items-center justify-center min-h-full py-20 w-full px-6">
+    <div class="flex flex-col items-center space-y-8 w-full max-w-sm">
+      <a href="/" class="text-3xl font-black text-gray-900 hover:text-primary transition-colors tracking-tight lowercase">Strona Główna</a>
+      <a href="/o-mnie" class="text-3xl font-black text-gray-900 hover:text-primary transition-colors tracking-tight lowercase">O mnie</a>
+      
+      <div class="w-full h-px bg-gray-200 my-2"></div>
+      
+      <div class="text-center w-full">
+        <span class="text-sm font-bold text-gray-400 lowercase tracking-widest mb-6 block">Oferta</span>
+        <div class="flex flex-col space-y-5">
+          {services.map((service) => (
+            <a href={service.href} class="text-xl font-medium text-gray-700 hover:text-primary transition-colors lowercase">
+              {service.name}
+            </a>
+          ))}
+        </div>
+      </div>
+      
+      <div class="w-full h-px bg-gray-200 my-2"></div>
+      
+      <a href="/kontakt" class="text-3xl font-black text-gray-900 hover:text-primary transition-colors tracking-tight lowercase">Kontakt</a>
+      
+      <!-- Mobile Social Icons -->
+      <div class="flex space-x-4 pt-4">
+        <a href="#" class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors shadow-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+        <a href="#" class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors shadow-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>
+
 <script>
+  // Scroll Logic
   window.addEventListener('scroll', () => {
     const header = document.getElementById('main-header');
-    if (header) {
+    if (header && window.innerWidth >= 768) { 
       if (window.scrollY > 20) {
         header.classList.add('shadow-lg', 'bg-white/70', 'backdrop-blur-xl');
         header.classList.remove('shadow-sm', 'bg-white/40', 'backdrop-blur-md');
@@ -89,4 +131,25 @@ const services = [
       }
     }
   });
+
+  // Mobile Menu Logic
+  const mobileMenuBtn = document.getElementById('mobile-menu-button');
+  const closeMenuBtn = document.getElementById('close-mobile-menu');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (mobileMenuBtn && closeMenuBtn && mobileMenu) {
+    // Otwieranie
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('opacity-0', 'invisible');
+      mobileMenu.classList.add('opacity-100', 'visible');
+      document.body.style.overflow = 'hidden'; 
+    });
+
+    // Zamykanie
+    closeMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('opacity-0', 'invisible');
+      mobileMenu.classList.remove('opacity-100', 'visible');
+      document.body.style.overflow = ''; 
+    });
+  }
 </script>

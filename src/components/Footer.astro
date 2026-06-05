@@ -2,13 +2,13 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-transparent pt-16 pb-8">
+<footer class="bg-transparent pt-12 md:pt-16 pb-8">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 mb-12 text-center md:text-left">
       <!-- Brand -->
-      <div class="col-span-1">
+      <div class="col-span-1 flex flex-col items-center md:items-start">
         <a href="/" class="mb-6 inline-block">
-          <img src="/logo-blue.png" alt="Weronika Nowik Doula" class="h-32 md:h-48 w-auto object-contain transition-opacity hover:opacity-80 mix-blend-multiply" />
+          <img src="/logo-blue.png" alt="Weronika Nowik Doula" class="h-24 md:h-32 lg:h-48 w-auto object-contain transition-opacity hover:opacity-80 mix-blend-multiply" />
         </a>
         <p class="text-gray-600 text-sm max-w-xs mt-2">
           Wsparcie okołoporodowe, konsultacje i grupy dla kobiet w ciąży. Razem w drodze do macierzyństwa.
@@ -18,7 +18,7 @@ const currentYear = new Date().getFullYear();
       <!-- Links -->
       <div class="col-span-1">
         <h3 class="font-bold text-gray-900 mb-4">Szybkie linki</h3>
-        <ul class="space-y-2">
+        <ul class="space-y-3 md:space-y-2">
           <li><a href="/o-mnie" class="text-gray-600 hover:text-primary transition-colors text-sm">O mnie</a></li>
           <li><a href="/#oferta" class="text-gray-600 hover:text-primary transition-colors text-sm">Moja oferta</a></li>
           <li><a href="/kontakt" class="text-gray-600 hover:text-primary transition-colors text-sm">Kontakt</a></li>
@@ -28,19 +28,19 @@ const currentYear = new Date().getFullYear();
       <!-- Contact -->
       <div class="col-span-1">
         <h3 class="font-bold text-gray-900 mb-4">Kontakt</h3>
-        <ul class="space-y-2 text-sm text-gray-600">
+        <ul class="space-y-3 md:space-y-2 text-sm text-gray-600">
           <li>Email: kontakt@weronikanowik.pl</li>
           <li>Tel: +48 123 456 789</li>
-          <li><a href="#" class="text-primary hover:underline">Instagram</a> | <a href="#" class="text-primary hover:underline">Facebook</a></li>
+          <li class="flex justify-center md:justify-start gap-4"><a href="#" class="text-primary hover:underline">Instagram</a><a href="#" class="text-primary hover:underline">Facebook</a></li>
         </ul>
       </div>
     </div>
     
-    <div class="border-t border-secondary/40 pt-8 flex flex-col md:flex-row justify-between items-center">
+    <div class="border-t border-secondary/40 pt-8 flex flex-col md:flex-row justify-between items-center text-center md:text-left gap-4 md:gap-0">
       <p class="text-sm text-gray-500">
         &copy; {currentYear} Weronika Nowik. Wszelkie prawa zastrzeżone.
       </p>
-      <p class="text-sm text-gray-400 mt-2 md:mt-0">
+      <p class="text-sm text-gray-400">
         Zaprojektowane z ❤️
       </p>
     </div>
