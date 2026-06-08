@@ -1,12 +1,32 @@
 ---
-const services = [
-  { name: 'Wsparcie okołoporodowe', href: '/oferta/doula' },
-  { name: 'Konsultacje przedporodowe', href: '/oferta/konsultacje' },
-  { name: 'Grupy Ciążowe', href: '/oferta/grupy-ciazowe' },
-  { name: 'Grupa Urodziłam Życie', href: '/oferta/urodzilam-zycie' },
-  { name: 'Randki dla Rodziców', href: '/oferta/randki-dla-rodzicow' },
-  { name: 'Łagodności - Spotkania Online', href: '/oferta/lagodnosci' },
-];
+import PocketBase from 'pocketbase';
+
+const pb = new PocketBase('http://127.0.0.1:8090');
+let services = [];
+let ig = "#";
+let fb = "#";
+
+try {
+  const records = await pb.collection('services').getFullList({
+    sort: 'order',
+  });
+  services = records.map(record => ({
+    name: record.title,
+    href: `/oferta/${record.slug}`
+  }));
+
+  const settingsRecords = await pb.collection('site_settings').getList(1, 1);
+  if (settingsRecords.items.length > 0) {
+    ig = settingsRecords.items[0].instagram_link || "#";
+    fb = settingsRecords.items[0].facebook_link || "#";
+  }
+} catch (e) {
+  console.error("PocketBase connection error in Header:", e.message);
+  // Fallback if PB is down
+  services = [
+    { name: 'Błąd połączenia z bazą', href: '#' }
+  ];
+}
 ---
 
 <header id="main-header" class="sticky top-0 md:top-8 w-full z-50 transition-all duration-300 bg-white/40 backdrop-blur-md border border-transparent md:border-white/60 shadow-sm rounded-none md:rounded-[3rem]">
@@ -55,10 +75,10 @@ const services = [
 
       <!-- Ikony Social Media z prawej strony (Desktop) -->
       <div class="hidden lg:flex space-x-3 items-center w-48 justify-end z-10">
-        <a href="#" class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors duration-300 shadow-sm border border-gray-100">
+        <a href={ig} target="_blank" class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors duration-300 shadow-sm border border-gray-100">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </a>
-        <a href="#" class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors duration-300 shadow-sm border border-gray-100">
+        <a href={fb} target="_blank" class="w-10 h-10 rounded-full bg-white/50 backdrop-blur-md flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors duration-300 shadow-sm border border-gray-100">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
         </a>
       </div>
@@ -106,10 +126,10 @@ const services = [
       
       <!-- Mobile Social Icons -->
       <div class="flex space-x-4 pt-4">
-        <a href="#" class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors shadow-sm">
+        <a href={ig} target="_blank" class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors shadow-sm">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </a>
-        <a href="#" class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors shadow-sm">
+        <a href={fb} target="_blank" class="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors shadow-sm">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
         </a>
       </div>

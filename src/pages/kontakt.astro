@@ -1,15 +1,39 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Button } from '../components/Button';
+import PocketBase from 'pocketbase';
+
+const pb = new PocketBase('http://127.0.0.1:8090');
+let pageData = null;
+let settings = null;
+
+try {
+  const records = await pb.collection('contact_page').getList(1, 1);
+  if (records.items.length > 0) pageData = records.items[0];
+  
+  const setRecords = await pb.collection('site_settings').getList(1, 1);
+  if (setRecords.items.length > 0) settings = setRecords.items[0];
+} catch (e) {
+  console.error("PocketBase connection error in kontakt:", e.message);
+}
+
+const title = pageData?.title || "Porozmawiajmy";
+const subtitle = pageData?.subtitle || "Masz pytania? Chcesz umówić się na niezobowiązujące spotkanie? Napisz do mnie. Odpowiadam najszybciej jak to możliwe!";
+const workingArea = pageData?.working_area || "<p>Warszawa i okolice do 30km.<br/>Konsultacje i spotkania możliwe również online.</p>";
+
+const phone = settings?.phone || "+48 123 456 789";
+const email = settings?.email || "kontakt@weronikanowik.pl";
+const ig = settings?.instagram_link || "#";
+const fb = settings?.facebook_link || "#";
 ---
 
 <Layout title="Kontakt">
   <div class="pt-28 md:pt-36 pb-12 md:pb-16 bg-gray-50 rounded-t-none md:rounded-t-[3rem]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto slide-up">
-        <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-gray-900">Porozmawiajmy</h1>
+        <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-gray-900">{title}</h1>
         <p class="text-lg md:text-xl text-gray-600 px-4">
-          Masz pytania? Chcesz umówić się na niezobowiązujące spotkanie? Napisz do mnie. Odpowiadam najszybciej jak to możliwe!
+          {subtitle}
         </p>
       </div>
     </div>
@@ -30,7 +54,7 @@ import { Button } from '../components/Button';
               </div>
               <div>
                 <p class="font-bold text-gray-900">Telefon</p>
-                <p class="text-gray-600">+48 123 456 789</p>
+                <p class="text-gray-600">{phone}</p>
               </div>
             </div>
 
@@ -40,7 +64,7 @@ import { Button } from '../components/Button';
               </div>
               <div>
                 <p class="font-bold text-gray-900">E-mail</p>
-                <p class="text-gray-600">kontakt@weronikanowik.pl</p>
+                <p class="text-gray-600">{email}</p>
               </div>
             </div>
 
@@ -50,7 +74,7 @@ import { Button } from '../components/Button';
               </div>
               <div>
                 <p class="font-bold text-gray-900">Obszar działania</p>
-                <p class="text-gray-600">Warszawa i okolice do 30km.<br/>Konsultacje i spotkania możliwe również online.</p>
+                <div class="text-gray-600 prose prose-sm max-w-none prose-p:m-0" set:html={workingArea}></div>
               </div>
             </div>
           </div>
@@ -58,10 +82,10 @@ import { Button } from '../components/Button';
           <div class="mt-12">
             <h3 class="text-xl font-bold mb-4">Śledź mnie na bieżąco:</h3>
             <div class="flex space-x-4">
-              <a href="#" class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors">
+              <a href={ig} target="_blank" class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors">
                 IG
               </a>
-              <a href="#" class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors">
+              <a href={fb} target="_blank" class="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-primary hover:text-white transition-colors">
                 FB
               </a>
             </div>

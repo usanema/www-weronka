@@ -2,6 +2,55 @@
 import Layout from '../layouts/Layout.astro';
 import { Button } from '../components/Button';
 import ServiceCard from '../components/ServiceCard.astro';
+import PocketBase from 'pocketbase';
+
+const pb = new PocketBase('http://127.0.0.1:8090');
+
+let services = [];
+let siteSettings = null;
+let homeData = null;
+
+try {
+  services = await pb.collection('services').getFullList({ sort: 'order' });
+  const settingsRecords = await pb.collection('site_settings').getList(1, 1);
+  if (settingsRecords.items.length > 0) {
+    siteSettings = settingsRecords.items[0];
+  }
+  const homeRecords = await pb.collection('home_page').getList(1, 1);
+  if (homeRecords.items.length > 0) {
+    homeData = homeRecords.items[0];
+  }
+} catch (e) {
+  console.error("PocketBase connection error in index:", e.message);
+}
+
+// Fallback texts
+const labelText = siteSettings?.hero_title ? `Doula: ${siteSettings.hero_title}` : "Twoja Doula";
+
+const heroTitle = homeData?.hero_title || "Towarzyszę Ci w drodze do macierzyństwa";
+const heroSubtitle = homeData?.hero_subtitle || "Wsparcie emocjonalne, informacyjne i fizyczne na każdym etapie ciąży, porodu i połogu.";
+
+const aboutTitle = homeData?.about_title || "Cześć, jestem Weronika!";
+const aboutContent = homeData?.about_content || "<p>Wierzę, że poród to piękne wydarzenie...</p>";
+const aboutImage = homeData?.about_image 
+  ? `http://127.0.0.1:8090/api/files/home_page/${homeData.id}/${homeData.about_image}`
+  : "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=1000&auto=format&fit=crop";
+
+const offerTitle = homeData?.offer_title || "W czym mogę Ci pomóc?";
+const offerSubtitle = homeData?.offer_subtitle || "Odkryj formy wsparcia...";
+
+const ctaTitle = homeData?.cta_title || "Porozmawiajmy o Twoich potrzebach";
+const ctaSubtitle = homeData?.cta_subtitle || "Pierwsza konsultacja jest zawsze darmowa...";
+const ctaBgImage = homeData?.cta_background_image 
+  ? `http://127.0.0.1:8090/api/files/home_page/${homeData.id}/${homeData.cta_background_image}`
+  : "https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=2000&auto=format&fit=crop";
+
+// Highlight text helper
+const titleParts = heroTitle.split(' macierzyństwa');
+const titleHtml = titleParts.length > 1 
+  ? `${titleParts[0]} <span class="text-primary relative whitespace-nowrap">macierzyństwa<svg class="absolute w-full h-3 md:h-4 -bottom-1 left-0 text-primary/20" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q50,20 100,10" stroke="currentColor" stroke-width="8" fill="none"/></svg></span>${titleParts[1]}`
+  : heroTitle;
+
 ---
 
 <Layout title="Strona Główna">
@@ -12,12 +61,9 @@ import ServiceCard from '../components/ServiceCard.astro';
     
     <div class="w-full px-4 sm:px-6 md:px-16 lg:px-24 relative z-10 pt-28 md:pt-32">
       <div class="max-w-3xl fade-in text-center md:text-left">
-        <span class="inline-block py-1 px-4 rounded-full bg-primary/10 text-primary font-bold text-xs sm:text-sm mb-6 tracking-widest uppercase shadow-sm">Twoja Doula</span>
-        <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 mb-6 md:mb-8 leading-[1.15] md:leading-[1.1] tracking-tight">
-          Towarzyszę Ci w drodze do <span class="text-primary relative whitespace-nowrap">macierzyństwa<svg class="absolute w-full h-3 md:h-4 -bottom-1 left-0 text-primary/20" viewBox="0 0 100 20" preserveAspectRatio="none"><path d="M0,10 Q50,20 100,10" stroke="currentColor" stroke-width="8" fill="none"/></svg></span>
-        </h1>
+        <h1 class="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-gray-900 mb-6 md:mb-8 leading-[1.15] md:leading-[1.1] tracking-tight" set:html={titleHtml}></h1>
         <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-8 md:mb-10 max-w-2xl mx-auto md:mx-0 leading-relaxed font-light">
-          Wsparcie emocjonalne, informacyjne i fizyczne na każdym etapie ciąży, porodu i połogu. Zaufaj swojej intuicji i poczuj się bezpiecznie.
+          {heroSubtitle}
         </p>
         <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center md:justify-start">
           <Button href="/#oferta" variant="primary" className="text-base md:text-lg px-6 md:px-8 py-3 md:py-4 w-full sm:w-auto">Poznaj moją ofertę</Button>
@@ -34,7 +80,7 @@ import ServiceCard from '../components/ServiceCard.astro';
         <div class="relative slide-up order-2 lg:order-1">
           <div class="aspect-square rounded-[2rem] md:rounded-[2.5rem] overflow-hidden bg-secondary/30 rotate-2 shadow-xl max-w-md mx-auto lg:max-w-none">
             <img 
-              src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=1000&auto=format&fit=crop" 
+              src={aboutImage} 
               alt="Weronika Nowik" 
               class="w-full h-full object-cover -rotate-2 transition-transform hover:scale-105 duration-700"
             />
@@ -42,15 +88,8 @@ import ServiceCard from '../components/ServiceCard.astro';
           <div class="absolute -bottom-10 -right-10 w-48 md:w-64 h-48 md:h-64 bg-primary/10 rounded-full blur-3xl -z-10"></div>
         </div>
         <div class="slide-up text-center lg:text-left order-1 lg:order-2" style="animation-delay: 0.2s">
-          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-gray-900 tracking-tight">Cześć, jestem Weronika!</h2>
-          <div class="space-y-4 md:space-y-6 text-gray-600 text-base sm:text-lg md:text-xl leading-relaxed font-light">
-            <p>
-              Wierzę, że poród to piękne, transformujące wydarzenie, a nie tylko medyczny proces. Jako doula pomagam kobietom odkryć ich wewnętrzną siłę i przygotować się na przyjęcie nowego życia w spokoju i zaufaniu do własnego ciała.
-            </p>
-            <p>
-              Moim celem jest zapewnienie Ci ciągłego wsparcia — od momentu, gdy dowiesz się o ciąży, aż po wyzwania związane z połogiem. Nie jesteś w tym sama.
-            </p>
-          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 md:mb-8 text-gray-900 tracking-tight">{aboutTitle}</h2>
+          <div class="prose prose-lg text-gray-600 text-base sm:text-lg md:text-xl leading-relaxed font-light" set:html={aboutContent}></div>
           <div class="mt-8 md:mt-10">
             <Button href="/o-mnie" variant="secondary" className="px-6 md:px-8 py-3 md:py-4 w-full sm:w-auto">Więcej o mnie</Button>
           </div>
@@ -62,71 +101,35 @@ import ServiceCard from '../components/ServiceCard.astro';
   <!-- Oferta -->
   <section id="oferta" class="py-16 md:py-24 px-4 sm:px-6 md:px-16 lg:px-24 scroll-mt-24">
     <div class="text-center max-w-3xl mx-auto mb-12 md:mb-20 slide-up">
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 md:mb-6 text-gray-900 tracking-tight">W czym mogę Ci pomóc?</h2>
-      <p class="text-lg sm:text-xl md:text-2xl text-gray-600 font-light leading-relaxed">Odkryj formy wsparcia, które przygotowałam dla Ciebie na każdym etapie tej wyjątkowej drogi.</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 md:mb-6 text-gray-900 tracking-tight">{offerTitle}</h2>
+      <p class="text-lg sm:text-xl md:text-2xl text-gray-600 font-light leading-relaxed">{offerSubtitle}</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-      <div class="slide-up" style="animation-delay: 0.1s">
-        <ServiceCard 
-          title="Wsparcie okołoporodowe (Doula)"
-          description="Ciągłe wsparcie emocjonalne, fizyczne i informacyjne w czasie ciąży, podczas porodu i w połogu."
-          href="/oferta/doula"
-          color="bg-pink-50"
-        />
-      </div>
-      <div class="slide-up" style="animation-delay: 0.2s">
-        <ServiceCard 
-          title="Konsultacje Przedporodowe"
-          description="Indywidualne spotkania pomagające stworzyć plan porodu, poznać techniki relaksacyjne i przygotować ciało."
-          href="/oferta/konsultacje"
-          color="bg-blue-50"
-        />
-      </div>
-      <div class="slide-up" style="animation-delay: 0.3s">
-        <ServiceCard 
-          title="Grupy Ciążowe"
-          description="Kręgi wsparcia dla kobiet w ciąży. Poczucie siostrzeństwa, dzielenie się doświadczeniami i wspólne przygotowanie."
-          href="/oferta/grupy-ciazowe"
-          color="bg-green-50"
-        />
-      </div>
-      <div class="slide-up" style="animation-delay: 0.4s">
-        <ServiceCard 
-          title="Grupa Urodziłam Życie"
-          description="Wsparcie w czwartym trymestrze. Pomoc w odnalezieniu się w nowej roli mamy w atmosferze akceptacji i zrozumienia."
-          href="/oferta/urodzilam-zycie"
-          color="bg-purple-50"
-        />
-      </div>
-      <div class="slide-up" style="animation-delay: 0.5s">
-        <ServiceCard 
-          title="Randki dla Rodziców"
-          description="Wyjątkowe spotkania dla par prowadzone wspólnie z moim mężem. Pielęgnowanie relacji po pojawieniu się dziecka."
-          href="/oferta/randki-dla-rodzicow"
-          color="bg-orange-50"
-        />
-      </div>
-      <div class="slide-up" style="animation-delay: 0.6s">
-        <ServiceCard 
-          title="Łagodności - Spotkania Online"
-          description="Kręgi online stworzone z myślą o mamach z całej Polski i świata. Połączmy się w łagodności z każdego miejsca na Ziemi."
-          href="/oferta/lagodnosci"
-          color="bg-teal-50"
-        />
-      </div>
+      {services.length > 0 ? services.map((service, index) => (
+        <div class="slide-up" style={`animation-delay: ${0.1 * (index + 1)}s`}>
+          <ServiceCard 
+            title={service.title}
+            description={service.short_description}
+            href={`/oferta/${service.slug}`}
+            color={service.card_color}
+          />
+        </div>
+      )) : (
+        <p class="text-center col-span-full text-gray-500">Brak ofert w bazie danych lub błąd połączenia z serwerem.</p>
+      )}
     </div>
   </section>
 
   <!-- CTA -->
   <section class="mt-8 md:mt-12 mx-4 sm:mx-6 md:mx-16 lg:mx-24 mb-16 md:mb-24 rounded-[2rem] md:rounded-[3rem] py-16 md:py-24 bg-primary relative overflow-hidden shadow-xl">
-    <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=2000&auto=format&fit=crop')] opacity-15 bg-cover bg-center mix-blend-overlay"></div>
+    <div class="absolute inset-0 opacity-15 bg-cover bg-center mix-blend-overlay" style={`background-image: url('${ctaBgImage}')`}></div>
     <div class="absolute -top-20 -right-20 md:-top-40 md:-right-40 w-64 md:w-96 h-64 md:h-96 bg-white/20 blur-3xl rounded-full"></div>
     <div class="absolute -bottom-20 -left-20 md:-bottom-40 md:-left-40 w-64 md:w-96 h-64 md:h-96 bg-white/10 blur-3xl rounded-full"></div>
     
     <div class="max-w-4xl mx-auto px-6 md:px-8 text-center relative z-10 slide-up">
-      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 md:mb-8 tracking-tight">Porozmawiajmy o Twoich potrzebach</h2>
-      <p class="text-lg sm:text-xl md:text-2xl text-white/90 mb-10 md:mb-12 font-light leading-relaxed">Pierwsza konsultacja, podczas której sprawdzimy czy "nadajemy na tych samych falach", jest zawsze darmowa i do niczego nie zobowiązuje.</p>
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-6 md:mb-8 tracking-tight">{ctaTitle}</h2>
+      <p class="text-lg sm:text-xl md:text-2xl text-white/90 mb-10 md:mb-12 font-light leading-relaxed">{ctaSubtitle}</p>
       <Button href="/kontakt" variant="white" className="text-base md:text-lg px-6 md:px-8 py-3 md:py-4 shadow-xl w-full sm:w-auto">Umów niezobowiązujące spotkanie</Button>
     </div>
   </section>

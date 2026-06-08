@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PocketBase from 'pocketbase';
 
 interface Props {
   title: string;
@@ -9,6 +10,27 @@ interface Props {
 }
 
 const { title, description = "Weronika Nowik - Doula, wsparcie okołoporodowe, konsultacje przedporodowe, grupy ciążowe." } = Astro.props;
+
+let colors = {
+  primary: '#D85096',
+  secondary: '#BEDBF4',
+  dark: '#000000',
+  light: '#ffffff'
+};
+
+try {
+  const pb = new PocketBase('http://127.0.0.1:8090');
+  const settings = await pb.collection('site_settings').getList(1, 1);
+  if (settings.items.length > 0) {
+    const s = settings.items[0];
+    colors.primary = s.color_primary || colors.primary;
+    colors.secondary = s.color_secondary || colors.secondary;
+    colors.dark = s.color_dark || colors.dark;
+    colors.light = s.color_light || colors.light;
+  }
+} catch (e) {
+  console.error("PocketBase connection error in Layout:", e.message);
+}
 ---
 
 <!doctype html>
@@ -20,9 +42,22 @@ const { title, description = "Weronika Nowik - Doula, wsparcie okołoporodowe, k
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title} | Weronika Nowik - Doula</title>
+    <style define:vars={{
+      colorPrimary: colors.primary,
+      colorSecondary: colors.secondary,
+      colorDark: colors.dark,
+      colorLight: colors.light
+    }}>
+      :root {
+        --color-primary: var(--colorPrimary);
+        --color-secondary: var(--colorSecondary);
+        --color-dark: var(--colorDark);
+        --color-light: var(--colorLight);
+      }
+    </style>
   </head>
-  <body class="bg-[#BEDBF4] p-0 md:p-8 min-h-screen font-sans text-gray-900 selection:bg-primary/30">
-    <div class="max-w-[1600px] mx-auto bg-gradient-to-b from-white via-white to-[#BEDBF4]/50 rounded-none md:rounded-[3rem] shadow-none md:shadow-2xl min-h-screen md:min-h-[calc(100vh-4rem)] flex flex-col relative border-none md:border md:border-white/50">
+  <body class="bg-secondary p-0 md:p-8 min-h-screen font-sans text-gray-900 selection:bg-primary/30">
+    <div class="max-w-[1600px] mx-auto bg-gradient-to-b from-white via-white to-secondary/50 rounded-none md:rounded-[3rem] shadow-none md:shadow-2xl min-h-screen md:min-h-[calc(100vh-4rem)] flex flex-col relative border-none md:border md:border-white/50">
       <Header />
       <main class="flex-grow -mt-24 relative z-0">
         <slot />

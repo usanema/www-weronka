@@ -7,11 +7,11 @@ interface Props {
   color?: string;
 }
 
-const { title, description, href, color = "bg-secondary/30" } = Astro.props;
+const { title, description, href, color = "#BEDBF4" } = Astro.props;
 ---
 
 <a href={href} class="block group">
-  <div class={`h-full p-8 rounded-3xl ${color} transition-all duration-300 transform group-hover:-translate-y-2 hover:shadow-xl`}>
+  <div class="h-full p-8 rounded-3xl transition-all duration-300 transform group-hover:-translate-y-2 hover:shadow-xl" style={`background-color: ${color}`}>
     <div class="w-14 h-14 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm text-primary">
       <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
