@@ -3,7 +3,7 @@ import PocketBase from 'pocketbase';
 
 const currentYear = new Date().getFullYear();
 
-const pb = new PocketBase('http://srv50.mikr.us:30154');
+const pb = new PocketBase('https://pocketbase.bieda.it');
 let settings = null;
 try {
   const records = await pb.collection('site_settings').getList(1, 1);
@@ -12,7 +12,7 @@ try {
   console.error("PocketBase connection error in Footer:", e.message);
 }
 
-const logo = settings?.logo_image ? `http://srv50.mikr.us:30154/api/files/site_settings/${settings.id}/${settings.logo_image}` : "/logo-blue.png";
+const logo = settings?.logo_image ? `https://pocketbase.bieda.it/api/files/site_settings/${settings.id}/${settings.logo_image}` : "/logo-blue.png";
 const description = settings?.footer_description || "Wsparcie okołoporodowe, konsultacje i grupy dla kobiet w ciąży. Razem w drodze do macierzyństwa.";
 const phone = settings?.phone || "+48 123 456 789";
 const email = settings?.email || "kontakt@weronikanowik.pl";

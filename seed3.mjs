@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase';
 
-const pb = new PocketBase('http://srv50.mikr.us:30154');
+const pb = new PocketBase('https://pocketbase.bieda.it');
 
 async function seed() {
   await pb.admins.authWithPassword("admin@weronika.pl", "password12345");

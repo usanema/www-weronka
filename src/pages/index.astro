@@ -4,7 +4,7 @@ import { Button } from '../components/Button';
 import ServiceCard from '../components/ServiceCard.astro';
 import PocketBase from 'pocketbase';
 
-const pb = new PocketBase('http://srv50.mikr.us:30154');
+const pb = new PocketBase('https://pocketbase.bieda.it');
 
 let services = [];
 let siteSettings = null;
@@ -33,7 +33,7 @@ const heroSubtitle = homeData?.hero_subtitle || "Wsparcie emocjonalne, informacy
 const aboutTitle = homeData?.about_title || "Cześć, jestem Weronika!";
 const aboutContent = homeData?.about_content || "<p>Wierzę, że poród to piękne wydarzenie...</p>";
 const aboutImage = homeData?.about_image 
-  ? `http://srv50.mikr.us:30154/api/files/home_page/${homeData.id}/${homeData.about_image}`
+  ? `https://pocketbase.bieda.it/api/files/home_page/${homeData.id}/${homeData.about_image}`
   : "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=1000&auto=format&fit=crop";
 
 const offerTitle = homeData?.offer_title || "W czym mogę Ci pomóc?";
@@ -42,7 +42,7 @@ const offerSubtitle = homeData?.offer_subtitle || "Odkryj formy wsparcia...";
 const ctaTitle = homeData?.cta_title || "Porozmawiajmy o Twoich potrzebach";
 const ctaSubtitle = homeData?.cta_subtitle || "Pierwsza konsultacja jest zawsze darmowa...";
 const ctaBgImage = homeData?.cta_background_image 
-  ? `http://srv50.mikr.us:30154/api/files/home_page/${homeData.id}/${homeData.cta_background_image}`
+  ? `https://pocketbase.bieda.it/api/files/home_page/${homeData.id}/${homeData.cta_background_image}`
   : "https://images.unsplash.com/photo-1544126592-807ade215a0b?q=80&w=2000&auto=format&fit=crop";
 
 // Highlight text helper

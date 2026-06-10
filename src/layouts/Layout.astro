@@ -19,7 +19,7 @@ let colors = {
 };
 
 try {
-  const pb = new PocketBase('http://srv50.mikr.us:30154');
+  const pb = new PocketBase('https://pocketbase.bieda.it');
   const settings = await pb.collection('site_settings').getList(1, 1);
   if (settings.items.length > 0) {
     const s = settings.items[0];
