@@ -26,7 +26,12 @@ const imageUrl = service.image
   : "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=2000&auto=format&fit=crop";
 ---
 
-<Layout title={service.title}>
+<Layout 
+  title={service.title}
+  description={service.short_description}
+  image={imageUrl}
+  type="Service"
+>
   <div class="pt-28 md:pt-36 pb-12 md:pb-16 rounded-t-none md:rounded-t-[3rem]" style={`background-color: ${service.card_color || '#BEDBF4'}`}>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto slide-up">
