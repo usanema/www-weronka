@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import { Button } from '../components/Button';
 import PocketBase from 'pocketbase';
 
-const pb = new PocketBase('http://127.0.0.1:8090');
+const pb = new PocketBase('http://srv50.mikr.us:30154');
 let pageData = null;
 
 try {
@@ -19,7 +19,7 @@ const title = pageData?.title || "Kilka słów o mnie";
 const subtitle = pageData?.subtitle || "Poznaj moją historię i dowiedz się, dlaczego zdecydowałam się towarzyszyć kobietom w jednej z najważniejszych podróży ich życia.";
 const content = pageData?.content || "<p>Moja droga do bycia doulą...</p>";
 const heroImage = pageData?.hero_image 
-  ? `http://127.0.0.1:8090/api/files/about_page/${pageData.id}/${pageData.hero_image}`
+  ? `http://srv50.mikr.us:30154/api/files/about_page/${pageData.id}/${pageData.hero_image}`
   : "https://images.unsplash.com/photo-1555252834-8c80fb619208?q=80&w=1000&auto=format&fit=crop";
 
 ---
