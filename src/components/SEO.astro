@@ -1,0 +1,55 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  url?: string;
+  type?: 'WebSite' | 'Service' | 'ProfilePage' | 'ContactPage' | 'AboutPage';
+}
+
+const { 
+  title, 
+  description, 
+  image = "https://weronikanowik.pl/logo-blue.png", 
+  url = Astro.url.href, 
+  type = 'WebSite' 
+} = Astro.props;
+
+const siteName = "Weronika Nowik - Doula";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": type,
+  "name": title,
+  "description": description,
+  "url": url,
+  "image": image,
+  "provider": {
+    "@type": "Person",
+    "name": "Weronika Nowik",
+    "jobTitle": "Doula"
+  }
+};
+---
+
+<!-- Global Metadata -->
+<meta name="description" content={description} />
+<link rel="canonical" href={url} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={url} />
+<meta property="og:title" content={`${title} | ${siteName}`} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={url} />
+<meta property="twitter:title" content={`${title} | ${siteName}`} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={image} />
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

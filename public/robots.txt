@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://weronikanowik.pl/sitemap-index.xml

@@ -53,7 +53,12 @@ const titleHtml = titleParts.length > 1
 
 ---
 
-<Layout title="Strona Główna">
+<Layout 
+  title="Strona Główna" 
+  description={siteSettings?.seo_description || heroSubtitle}
+  image={aboutImage}
+  type="WebSite"
+>
   
   <!-- Hero Section -->
   <section class="relative min-h-[85vh] flex items-center overflow-hidden">
