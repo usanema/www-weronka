@@ -3,15 +3,24 @@ import Layout from '../../layouts/Layout.astro';
 import { Button } from '../../components/Button';
 import PocketBase from 'pocketbase';
 
-const { slug } = Astro.params;
-const pb = new PocketBase('https://pocketbase.bieda.it');
-
-let service;
-try {
-  service = await pb.collection('services').getFirstListItem(`slug="${slug}"`);
-} catch (e) {
-  return Astro.redirect('/404');
+export async function getStaticPaths() {
+  const pb = new PocketBase('https://pocketbase.bieda.it');
+  try {
+    const records = await pb.collection('services').getFullList({ sort: 'order' });
+    
+    return records.map((record) => ({
+      params: { slug: record.slug },
+      props: { 
+        service: record
+      },
+    }));
+  } catch (e) {
+    console.error("Error generating static paths:", e);
+    return [];
+  }
 }
+
+const { service } = Astro.props;
 const imageUrl = service.image 
   ? `https://pocketbase.bieda.it/api/files/services/${service.id}/${service.image}` 
   : "https://images.unsplash.com/photo-1531983412531-1f49a365ffed?q=80&w=2000&auto=format&fit=crop";
